@@ -1,49 +1,49 @@
 SELECT * FROM mintclassics.products
-order by productName desc;
+ORDER BY productName desc;
 
 SELECT * FROM mintclassics.warehouses;
 
-select warehouseCode, count(*)as num_of_distinct_products,sum(quantityInStock)as total_products_in_stock
+SELECT warehouseCode, COUNT(*)AS num_of_distinct_products,sum(quantityInStock)AS total_products_in_stock
 FROM mintclassics.products
-group by warehouseCode;
+GROUP BY warehouseCode;
 
 SELECT productCode,productName,quantityInStock,warehouseCode
 FROM mintclassics.products
-order by warehouseCode;
+ORDER BY warehouseCode;
 
-select p.productLine,count(o.quantityOrdered)as num_of_sales
-from orderdetails as o join products as p
-on p.productCode=o.productCode
-group by productLine
-order by num_of_sales desc;
+SELECT p.productLine,count(o.quantityOrdered)as num_of_sales
+FROM orderdetails as o join products as p
+ON p.productCode=o.productCode
+GROUP BY productLine
+ORDER BY num_of_sales desc;
 
-select * from mintclassics.orderdetails
-where productCode='S10_1678';
+SELECT * FROM mintclassics.orderdetails
+WHERE productCode='S10_1678';
 
-select p.productCode,p.productName,sum(o.quantityOrdered) as total_orderd_num,sum(o.priceEach)
-from products as p 
-	join orderdetails as o
-	on p.productCode=o.productCode
-group by productCode,productName
-order by p.productName desc;
+SELECT p.productCode,p.productName,sum(o.quantityOrdered) AS total_orderd_num,sum(o.priceEach)
+FROM products AS p 
+	JOIN orderdetails AS o
+	ON p.productCode=o.productCode
+GROUP BY productCode,productName
+ORDER BY p.productName desc;
 
-select 
+SELECT 
 	p.productLine,
-	count(w.warehouseCode)as num_of_prroducts,
+	COUNT(w.warehouseCode)AS num_of_prroducts,
     w.warehouseCode,
     w.warehouseName,
-    sum(p.quantityInStock)as total_stock
-from 
-	products as p
-join 
-	warehouses as w
-on 
+    sum(p.quantityInStock)AS total_stock
+FROM 
+	products AS p
+JOIN 
+	warehouses AS w
+ON 
 	p.warehouseCode=w.warehouseCode
-group by 
+GROUP BY 
 	productLine,
     warehouseCode,
     warehouseName
-order by total_stock desc;
+ORDER BY total_stock desc;
 
  SELECT
   p.warehouseCode AS warehouseCode,
